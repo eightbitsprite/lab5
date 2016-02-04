@@ -1,18 +1,14 @@
 #!/bin/bash
-
 short_system=$(uname -s)
 sys_vagrant="0"
 sys_cygwin="0"
 sys_osx="0"
-
 mongo_missing="0"
 node_missing="0"
 heroku_missing="0"
 npm_missing="0"
-
 # set this to the number of the current lab
 cur_lab=5
-
 system=$(uname -a | cut -d' ' -f1,2)
 if [ "$system" == "Linux precise32" ] || [ "$system" == "Linux vagrant-ubuntu-trusty-64" ]
 then
@@ -24,13 +20,12 @@ then
   if [ "$user" != "root" ]
   then
     echo "ERROR: You must run this script with sudo"
-    exit
-  fi
-
-elif [ $short_system == "Darwin"  ]
-then
-  sys_osx="1"
-  echo "Running on Mac OSX"
+    exit#
+  fi#
+#elif [ $short_system == "Darwin"  ]
+#then
+  #sys_osx="1"
+  #echo "Running on Mac OSX"
 else
   sys_cygwin="1"
   echo "Running on Windows"
@@ -43,11 +38,10 @@ then
   required_pkg=( "mongo" "heroku" "node" "npm")
 
   all_present="1"
-
   for i in ${required_pkg[@]}
   do
-    binloc="$(which $i)"
-    if [ "${#binloc}" == "0" ]
+binloc="$(which $i)"
+ if [ "${#binloc}" == "0" ]
     then
       echo "You don't have $i"
       all_present="0"
